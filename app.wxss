@@ -3,3 +3,7 @@
 @import 'assets/styles/prompt.wxss';
 @import 'assets/styles/skyvow.wxss';
 @import 'wxParse/wxParse.wxss';
+
+.text-center {
+	text-align: center;
+}

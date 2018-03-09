@@ -1,18 +1,15 @@
 {
   "pages": [
     "pages/start/index",
-    "pages/index/index",
-    "pages/login/index",
-    "pages/appointment/index",
-    "pages/comment/index"
+    "pages/index/index"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#f6ee55",
+    "navigationBarBackgroundColor": "#ed7f61",
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "",
-    "backgroundColor": "#f6ee55",
+    "backgroundColor": "#ed7f61",
     "backgroundTextStyle": "dark",
-    "enablePullDownRefresh":true
+    "enablePullDownRefresh":false
   },
   "debug": false
   

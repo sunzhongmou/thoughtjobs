@@ -1,0 +1,22 @@
+<template name="company-culture">
+
+    <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__hd">公司文化</view>
+        <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_text text-center">
+                <view class="">Do the right thing</view>
+                <view class="">Attitude, aptitude and integrity</view>
+                <view class="">Service to others and society over self</view>
+                <view class="">Solidarity over charity</view>
+                <view class="">Serve holistic goals over achieving targets</view>
+                <view class="">Personal and organizational transparency</view>
+                <view class="">Curiosity, creativity and passion</view>
+                <view class="">Fail fast and publish our mistakes</view>
+                <view class="">Intolerant of intolerance</view>
+                <view class="">No jerks</view>
+                <view class="">High values alignment, loosely coupled</view>
+            </view>
+        </view>
+    </view>
+
+</template>

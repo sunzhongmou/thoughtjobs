@@ -17,8 +17,7 @@ Page({
     },
     onShow() {},
     bindload(e) {
-      console.log('???? - startpage - bindload')
-    	setTimeout(App.WxService.getStorageSync('token') ? this.goIndex : this.goLogin, 3000)
+      setTimeout(App.WxService.getStorageSync('token') ? this.goIndex : this.goIndex, 3000)
     },
     goIndex() {
       App.WxService.redirectTo('/pages/index/index')

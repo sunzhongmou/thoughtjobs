@@ -1,11 +1,6 @@
-/*
- * 如果你希望使用此开源项目，请随意免费使用，没有版权限制。
- * 唯一的请求是将 《仲谋科技》及官网链接-sunzhongmou.com展示在你的小程序中即可！开源也需要支持，谢谢理解！
-*/
 export default {
-  starName: '仲谋科技',
-  startPage: 'http://little7-1252484566.cosgz.myqcloud.com/mini-program/zm_tech_start_page.png',
-  // 小程序用户登录介面icon图标
+  starName: 'ThoughtJobs',
+  startPage: '../../assets/images/home/zm_tech_start_page.png',
   loginLogo: 'http://little7-1252484566.cosgz.myqcloud.com/mini-program/zm-logo-420.png',
   // 匿名用户默认头像
   anonymous_url: 'http://little7-1252484566.cosgz.myqcloud.com/mini-program/zhongmou.png',

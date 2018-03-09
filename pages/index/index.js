@@ -6,130 +6,73 @@ const App = getApp()
 Page({
     data: {
       coachInfo: {
-        "nickName": '只推荐好工作',
-        "description": '专注为你提供ThoughtWorks招聘最新消息！',
+        "nickName": 'ThoughtWorks最新招聘信息和相关资讯',
+        "description": '作为朋友，只为你提供信息，不替你做决定！',
         "phone": "17786044851",
         "avatar": '../../assets/images/ThoughtJobs-420.png'
       },
-      like: 0,
+      like: '工作环境',
       message: 0,
+      infoList: [],
       postsList: [],
+      officeImages: [
+        { path: 'http://p5bvccvyy.bkt.clouddn.com/1.jpg' },
+        { path: 'http://p5bvccvyy.bkt.clouddn.com/2.jpg' },
+        { path: 'http://p5bvccvyy.bkt.clouddn.com/3.jpg' },
+        { path: 'http://p5bvccvyy.bkt.clouddn.com/4.jpg' },
+        { path: 'http://p5bvccvyy.bkt.clouddn.com/5.jpg' },
+        { path: 'http://p5bvccvyy.bkt.clouddn.com/6.jpg' },
+        { path: 'http://p5bvccvyy.bkt.clouddn.com/7.jpg' },
+        { path: 'http://p5bvccvyy.bkt.clouddn.com/8.jpg' },
+        { path: 'http://p5bvccvyy.bkt.clouddn.com/9.jpg' },
+        { path: 'http://p5bvccvyy.bkt.clouddn.com/10.jpg' }
+      ],
+      hirePosts: [
+        { path: 'http://p5bvccvyy.bkt.clouddn.com/hirepost-2018.jpeg' }
+      ],
     },
     onLoad() {
       this.lastLikeDate = null
       this.userInfo = App.WxService.getStorageSync('userinfo')
-      this.fetchData()
     },
     onShow() {
     },
-    onPullDownRefresh() {
-        console.info('onPullDownRefresh')
-        this.fetchData()
-    },
-    onReachBottom() {
-      console.info('onReachBottom')
-    },
-    syncData() {
-      console.log('index page syncData...')
-      var self = this
-      let postList = App.globalData.events
-      self.setData({
-        postsList: postList.map(function (item) {
-          item.lastReplyAt = self.setTimeReadable(item.last_reply_at);
-          if (item.author.loginname === 'undefined@undefined'
-            || item.author.loginname === '　@') {
-            item.author.loginname = '匿名用户'
-          }
-          if (item.author.avatar_url === ''
-            || item.author.avatar_url === undefined) {
-            item.author.avatar_url = Config.anonymous_url
-          }
-          return item;
-        }),
-        coachInfo: App.globalData.coachInfo
-      })
-      self.analyseData(postList)
-    },
-    analyseData(events) {
-      var likeCount = 0
-      var messageCount = 0
-      events.forEach(function(item){
-        if('like' === item.type){ 
-          likeCount++
-        } else if ('message' === item.type){
-          messageCount++
-        }
-      })
-      this.setData({
-        like: likeCount,
-        message: messageCount
-      })
-    },
-    setTimeReadable(timeStr){
-      return util.getDateDiff(util.newDateFromString(timeStr))
-    },
-    isLastLike4HoursAgo(){
-      if(!this.lastLikeDate){return true}
-      console.log(util.getDateDistanceOfHours(this.lastLikeDate))
-      if (util.getDateDistanceOfHours(this.lastLikeDate) > 4){
-        return true
-      }
-      return false
-    },
     onLikeButtonClicked() {
-      if (this.lastLikeDate && !this.isLastLike4HoursAgo()){
-        App.WxService.showModal({
-          content: `你的热情${Config.starName}已经感受到了！但不要这么急切，距离上一次感谢需要4个小时来消化，让${Config.starName}先缓一缓！`,
-          confirmText: "确认",
-          showCancel: false,
-          success: function (res) {
-            // res.confirm
-          }
-        })
-        return
-      }
+      const urls = this.data.officeImages.map(n => n.path)
+      const current = urls[Number(0)]
 
-      var self = this
-      wx.showToast({
-        title: '点个赞...',
-        icon: 'loading',
-        duration: 5000
-      });
-
-      App.updateJsonFile({
-        "type": 'like',
-        "avatar_url": this.userInfo.avatarUrl,
-        "loginname": this.userInfo.nickName + '@' + this.userInfo.city,
-        "title": `给${Config.starName}点了个赞！加油！`
-      }, function(){
-        self.syncData()
-        self.lastLikeDate = new Date();
-        console.log(self.lastLikeDate)
-        wx.showToast({
-          title: '点赞成功',
-          icon: 'success',
-          duration: 3000
-        });
+      App.WxService.previewImage({
+        current: current,
+        urls: urls,
       })
     },
     onCallButtonClicked() {
-      var self = this
+      App.WxService.showModal({
+        content: `请将你的简历发送至:\r\n\r\nwwsun@thoughtworks.com\r\n\r\n邮箱，我们将在第一时间为你定制专属你的ThoughtWorks之旅！`,
+        confirmText: "确认",
+        showCancel: false,
+        success: function (res) {
+          // res.confirm
+        }
+      })
+    },
+    onHireInfoButtonClicked() {
+      const urls = this.data.hirePosts.map(n => n.path)
+      console.log(urls)
+      const current = urls[Number(0)]
 
-      App.WxService.makePhoneCall({
-        phoneNumber: this.data.coachInfo.phone,
-        complete: function(res){
-          if (res.errMsg === 'makePhoneCall:ok') {
-
-            App.updateJsonFile({
-              "type": 'call',
-              "avatar_url": self.userInfo.avatarUrl,
-              "loginname": self.userInfo.nickName + '@' + self.userInfo.city,
-              "title": `向${Config.starName}打了个电话，咨询了一些问题。`
-            }, function () {
-              self.syncData()
-            })
-
-          }
+      App.WxService.previewImage({
+        current: current,
+        urls: urls,
+      })
+    },
+    onAboutButtonClicked() {
+      App.WxService.showModal({
+        content: `我们是一群发自内心热爱ThoughtWorks的TWer！\r\n\r\n ThoughtJobs这款微信息小程序就是我们自发组织，利用业余时间为她和你定制的礼物，希望给大家更多的机会了解彼此！`,
+        confirmText: "确认",
+        showCancel: false,
+        success: function (res) {
+          // res.confirm
         }
       })
     },
@@ -140,45 +83,22 @@ Page({
           this.onLikeButtonClicked()
           break
         case 'message':
-          App.WxService.navigateTo('/pages/comment/index')
+          this.onAboutButtonClicked()
           break
         case 'call':
           this.onCallButtonClicked()
           break
         case 'appointment':
-          App.WxService.navigateTo('/pages/appointment/index')
+          this.onHireInfoButtonClicked()
           break
       }
-    },
-    fetchData: function () {
-      var self = this;
-      this.setData({
-        postsList:[]
-      })
-
-      App.refreshJsonData(function(){
-        self.syncData()
-        wx.stopPullDownRefresh()
-      })
     },
     onShareAppMessage: function () {
       var self = this
         return {
-          title: `首页 - ${Config.starName}`,
+          title: `ThoughtWorks最新招聘信息`,
           path: '/pages/index/index',
           complete: function (res) {
-            if (res.errMsg === 'shareAppMessage:ok') {
-
-              App.updateJsonFile({
-                "type": 'share',
-                "avatar_url": self.userInfo.avatarUrl,
-                "loginname": self.userInfo.nickName + '@' + self.userInfo.city,
-                "title": '谢谢你的分享！Easy life, easy drive!'
-              }, function () {
-                self.syncData()
-              })
-
-            }
           },
           fail: function(res) {
           }

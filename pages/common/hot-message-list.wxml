@@ -1,11 +1,15 @@
 <template name="hot-message-list">
 
     <view class="weui-panel weui-panel_access">
-        <view class="weui-panel__hd">最新消息</view>
+        <view class="weui-panel__hd">员工福利</view>
         <view class="weui-panel__bd">
             <view class="weui-media-box weui-media-box_text">
-                <view class="weui-media-box__title weui-media-box__title_in-text">2107微信小程序上线啦〜〜</view>
-                <view class="">居家无忧，是小编小7一直以来的心愿，小7曾北漂7年，经历过搬家的无奈，新家的欢喜，深知其中的酸楚和快乐。 如今，小7要和大伙一起，让居家无忧，再也不用为房源不清晰，战战兢兢；再也不用为维修清洁，忙上忙下；让2107和我们一起，见证让租房，原来也可以有家的温馨。</view>
+                <view class="">1. 带薪年假8天起步， 带薪病假5天起步</view>
+                <view class="">2. Buddy、Sponser计划，为你贴心定制成长计划</view>
+                <view class="">3. 思沃学院 - 像巨人一样思考</view>
+                <view class="">4. 每年2000RMB学习基金</view>
+                <view class="">5. 全新MacBook Pro</view>
+                <view class="">6. 内部学习资料全面开放</view>
             </view>
         </view>
     </view>
